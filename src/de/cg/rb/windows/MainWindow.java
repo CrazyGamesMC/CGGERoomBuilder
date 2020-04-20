@@ -13,9 +13,11 @@ public class MainWindow extends JFrame {
     private JMenu menuFile = new JMenu("File");
     private JMenu menuProject = new JMenu("Project");
 
-    private JMenuItem itemFileNew = new JMenu("New Room");
+    private JMenuItem itemFileNew = new JMenuItem("New Room");
     private JMenuItem itemFileOpen = new JMenuItem("Open Room");
     private JMenuItem itemFileSave = new JMenuItem("Save Room");
+
+    private JMenuItem itemProjectAddObject = new JMenuItem("Add Object");
 
     public MainWindow() {
 
@@ -45,13 +47,16 @@ public class MainWindow extends JFrame {
 
         bar.add(menuFile);
 
+        itemProjectAddObject.addActionListener(e -> {new AddObjectsWindow();});
+        menuProject.add(itemProjectAddObject);
+
         bar.add(menuProject);
         add(bar);
     }
 
     void initPanels() {
         editPanel = new EditPanel();
-        editPanel.setBounds(10, 50, 200, getHeight()-60);
+        editPanel.setBounds(10, 50, 200, getHeight()-120);
         add(editPanel);
 
         roomPanel = new RoomPanel();

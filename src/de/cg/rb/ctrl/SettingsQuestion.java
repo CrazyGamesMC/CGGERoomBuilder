@@ -1,12 +1,14 @@
 package de.cg.rb.ctrl;
 
-public class SettingsQuestion {
+import javax.swing.*;
 
-    private String stringResult = "";
-    private boolean boolResult = false;
+public class SettingsQuestion {
 
     public String name;
     public Type type = Type.STRING;
+
+    public JTextField textField;
+    public JCheckBox checkBox;
 
     public SettingsQuestion(String name) {
         this.name = name;
@@ -21,20 +23,14 @@ public class SettingsQuestion {
         STRING, OPTIONAL_STRING, CHECKBOX;
     }
 
-    public void pushResult(boolean res) {
-        boolResult = res;
-        stringResult = "" + res;
-    }
 
-    public void pushResult(String res) {
-        stringResult = res;
-    }
+
 
     public String getResult() {
-        return stringResult;
+        return textField.getText();
     }
 
     public boolean getBoolResult() {
-        return boolResult;
+        return checkBox.isSelected();
     }
 }
