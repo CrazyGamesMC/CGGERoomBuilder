@@ -67,6 +67,7 @@ public class MainWindow extends JFrame {
 
         roomPanel = new RoomPanel();
         roomPanel.setBounds(230, 50, getWidth()-250, getHeight()-60);
+        roomPanel.setFocusable(true);
         add(roomPanel);
 
     }

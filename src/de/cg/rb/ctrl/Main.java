@@ -26,6 +26,6 @@ public class Main {
 
         FileManager.loadConfig();
 
-
+        Clock.start();
     }
 }

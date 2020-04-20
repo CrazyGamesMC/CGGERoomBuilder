@@ -1,5 +1,7 @@
 package de.cg.rb.windows;
 
+import de.cg.rb.ctrl.GlobalSettings;
+
 import javax.swing.*;
 
 public class EditPanel extends JPanel {
@@ -15,6 +17,10 @@ public class EditPanel extends JPanel {
         elements.setBounds(0, 0, 200, 1000);
         add(elements);
 
+
+        elements.addListSelectionListener((e) -> {
+            GlobalSettings.selected = e.getFirstIndex();
+        });
     }
 
 }
