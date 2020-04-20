@@ -24,14 +24,8 @@ public class Main {
 
         mainWindow = new MainWindow();
 
-        var qs = new SettingsQuestion[]{
-                new SettingsQuestion("X"),
-                new SettingsQuestion("Y"),
-                new SettingsQuestion("Name"),
-                new SettingsQuestion("Bool", SettingsQuestion.Type.CHECKBOX)
-        };
+        FileManager.loadConfig();
 
-        new SettingsWindow("Testing", qs);
 
     }
 }

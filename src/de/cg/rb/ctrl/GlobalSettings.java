@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class GlobalSettings {
 
+    public static final String fileExtensionSettings = ".roombuilder";
+
     public static ArrayList<GameObject> initializedObjects = new ArrayList<>();
 
     public static void updateElements() {

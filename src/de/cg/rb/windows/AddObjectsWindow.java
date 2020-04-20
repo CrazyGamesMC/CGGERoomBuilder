@@ -34,17 +34,9 @@ public class AddObjectsWindow extends SettingsWindow {
         var height = Integer.parseInt(questions[5].getResult());
         var include = questions[6].getBoolResult();
 
-        Image img = null;
-        if (!spritePath.equals("")) {
-            try {
-                img = ImageIO.read(new File(spritePath));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         GlobalSettings.initializedObjects.add((new GameObject(
-               width, height, asRect, include, pckg, name, img
+               width, height, asRect, include, pckg, name, spritePath
         )));
 
         GlobalSettings.updateElements();
