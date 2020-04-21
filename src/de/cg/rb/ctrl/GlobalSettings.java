@@ -6,8 +6,10 @@ import java.util.ArrayList;
 public class GlobalSettings {
 
     public static int selected = -1;
+    public static int gridSize = 1;
 
     public static final String fileExtensionSettings = ".roombuilder";
+    public static final String fileExtensionRoom = ".room";
 
     public static ArrayList<GameObject> initializedObjects = new ArrayList<>();
 

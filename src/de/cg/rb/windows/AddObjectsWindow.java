@@ -21,7 +21,6 @@ public class AddObjectsWindow extends SettingsWindow {
                 new SettingsQuestion("Height"),
                 new SettingsQuestion("Include Width and Height in constructor?", SettingsQuestion.Type.CHECKBOX, true)
         );
-
     }
 
     @Override

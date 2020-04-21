@@ -1,11 +1,13 @@
 package de.cg.rb.windows;
 
 import de.cg.rb.ctrl.FileManager;
+import de.cg.rb.ctrl.GlobalSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 
 public class MainWindow extends JFrame {
 
@@ -16,12 +18,15 @@ public class MainWindow extends JFrame {
 
     private JMenu menuFile = new JMenu("File");
     private JMenu menuProject = new JMenu("Project");
+    private JMenu menuEdit = new JMenu("Edit");
 
     private JMenuItem itemFileNew = new JMenuItem("New Room");
     private JMenuItem itemFileOpen = new JMenuItem("Open Room");
     private JMenuItem itemFileSave = new JMenuItem("Save Room");
 
     private JMenuItem itemProjectAddObject = new JMenuItem("Add Object");
+
+    private JMenuItem itemEditGrid = new JMenuItem("Grid");
 
     public MainWindow() {
 
@@ -45,19 +50,40 @@ public class MainWindow extends JFrame {
     }
 
     void initMenuBar() {
-        bar.setBounds(0,0,120,40);
+        bar.setBounds(0,0,210,40);
 
         itemFileNew.addActionListener(e -> new NewRoomWindow());
         menuFile.add(itemFileNew);
+
+        itemFileOpen.addActionListener(e -> {
+            var fc = new JFileChooser();
+            fc.setCurrentDirectory(new File("").getAbsoluteFile());
+            int result = fc.showOpenDialog(getParent());
+            if (result == JFileChooser.APPROVE_OPTION) {
+                var selected = fc.getSelectedFile();
+                FileManager.loadRoom(selected.getAbsolutePath());
+            }
+        });
         menuFile.add(itemFileOpen);
+
+        itemFileSave.addActionListener(e -> FileManager.saveRoom());
         menuFile.add(itemFileSave);
 
         bar.add(menuFile);
+
+
 
         itemProjectAddObject.addActionListener(e -> new AddObjectsWindow());
         menuProject.add(itemProjectAddObject);
 
         bar.add(menuProject);
+
+
+        itemEditGrid.addActionListener(e -> new GridWindow());
+        menuEdit.add(itemEditGrid);
+
+        bar.add(menuEdit);
+
         add(bar);
     }
 

@@ -74,4 +74,84 @@ public class FileManager {
         }
     }
 
+    public static void loadRoom(String path) {
+
+        RoomSettings.name = path;
+        RoomSettings.isInit = true;
+        RoomSettings.roomObjects.clear();
+
+        try {
+            var cgf = new CGFile(path);
+            cgf.load();
+            var fc = cgf.getContents();
+            var dh = new DataHandler(fc);
+
+            for (int i = 0; i<fc.getArrayList().size(); i++) {
+                String[] parts = dh.getRow(i);
+
+                String pckg = parts[0];
+                GameObject target = null;
+
+                for (var obj : GlobalSettings.initializedObjects) {
+                    if (obj.pckg.equals(pckg)) {
+                        target = obj;
+                    }
+                }
+
+                if (target != null) {
+
+                    int x = Integer.parseInt(parts[1]);
+                    int y = Integer.parseInt(parts[2]);
+                    int w = target.width;
+                    int h = target.height;
+
+                    if (target.includeWAndHInConstructor) {
+                        w = Integer.parseInt(parts[3]);
+                        h = Integer.parseInt(parts[4]);
+                    }
+
+                    RoomObject ro = new RoomObject(x,y,w,h,target);
+
+                    RoomSettings.roomObjects.add(ro);
+                }
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveRoom() {
+        if (RoomSettings.isInit) {
+            try {
+                var cgf = new CGFile(RoomSettings.name + GlobalSettings.fileExtensionRoom);
+                var file = cgf.getFile();
+
+                if (!file.exists()) file.createNewFile();
+
+                var contents = new FileContents(new ArrayList<String>());
+
+                for (RoomObject ro : RoomSettings.roomObjects) {
+                    contents.append(
+
+                            ro.gameObject.pckg + ";" +
+                            ro.x + ";" +
+                            ro.y + ";" +
+                            (ro.gameObject.includeWAndHInConstructor
+                                ? ro.w + ";" + ro.h
+                                : "")
+
+                    );
+                }
+
+                cgf.setContents(contents);
+                cgf.save();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
