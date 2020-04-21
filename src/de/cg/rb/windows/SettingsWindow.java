@@ -39,6 +39,7 @@ public class SettingsWindow extends JFrame {
 
             if (q.type == SettingsQuestion.Type.STRING) {
                 var textField = new JTextField();
+                textField.setText(q.defaultString);
                 textField.setBounds(220, 70 + i * (40), 200, 30);
                 add(textField);
 
@@ -47,6 +48,7 @@ public class SettingsWindow extends JFrame {
 
             else if (q.type == SettingsQuestion.Type.CHECKBOX) {
                 var checkBox = new JCheckBox();
+                checkBox.setSelected(q.defaultBool);
                 checkBox.setBounds(220, 70 + i * (40), 30, 30);
                 add(checkBox);
 

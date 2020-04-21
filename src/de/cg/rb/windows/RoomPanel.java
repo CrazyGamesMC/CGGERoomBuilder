@@ -71,18 +71,20 @@ public class RoomPanel extends JPanel {
     }
 
     private void mousePressedEvent(MouseEvent e) {
-        var selected = GlobalSettings.selected;
-        if (selected >= 0) {
-            var obj = GlobalSettings.initializedObjects.get(selected);
-            RoomObject ro;
+        if (RoomSettings.isInit) {
+            var selected = GlobalSettings.selected;
+            if (selected >= 0) {
+                var obj = GlobalSettings.initializedObjects.get(selected);
+                RoomObject ro;
 
-            int x = e.getX();
-            int y = e.getY();
-            int w = obj.width;
-            int h = obj.height;
+                int x = e.getX();
+                int y = e.getY();
+                int w = obj.width;
+                int h = obj.height;
 
-            ro = new RoomObject(x, y, w, h, obj);
-            RoomSettings.roomObjects.add(ro);
+                ro = new RoomObject(x, y, w, h, obj);
+                RoomSettings.roomObjects.add(ro);
+            }
         }
     }
 }

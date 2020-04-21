@@ -19,13 +19,14 @@ public class AddObjectsWindow extends SettingsWindow {
                 new SettingsQuestion("Or as Sprite"),
                 new SettingsQuestion("Width"),
                 new SettingsQuestion("Height"),
-                new SettingsQuestion("Include Width and Height in constructor?", SettingsQuestion.Type.CHECKBOX)
+                new SettingsQuestion("Include Width and Height in constructor?", SettingsQuestion.Type.CHECKBOX, true)
         );
 
     }
 
     @Override
     public void onConfirm() {
+        //Fetch object data from questions.
         var pckg = questions[0].getResult();
         var name = questions[1].getResult();
         var asRect = questions[2].getBoolResult();

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class NewRoomWindow extends SettingsWindow {
     public NewRoomWindow() {
-        super("New Room", new SettingsQuestion("Name / Path"));
+        super("New Room", new SettingsQuestion("Name / Path", "room1"));
     }
 
     @Override
