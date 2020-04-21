@@ -47,13 +47,14 @@ public class MainWindow extends JFrame {
     void initMenuBar() {
         bar.setBounds(0,0,120,40);
 
+        itemFileNew.addActionListener(e -> new NewRoomWindow());
         menuFile.add(itemFileNew);
         menuFile.add(itemFileOpen);
         menuFile.add(itemFileSave);
 
         bar.add(menuFile);
 
-        itemProjectAddObject.addActionListener(e -> {new AddObjectsWindow();});
+        itemProjectAddObject.addActionListener(e -> new AddObjectsWindow());
         menuProject.add(itemProjectAddObject);
 
         bar.add(menuProject);

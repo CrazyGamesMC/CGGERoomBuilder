@@ -17,7 +17,7 @@ public class SettingsWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLayout(null);
         setResizable(false);
-        setSize(500, 80+questions.length*75);
+        setSize(500, 150+questions.length*70);
 
         initFields(questions);
 
