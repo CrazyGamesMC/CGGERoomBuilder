@@ -1,9 +1,6 @@
 package de.cg.rb.windows;
 
-import de.cg.rb.ctrl.GlobalSettings;
-import de.cg.rb.ctrl.Main;
-import de.cg.rb.ctrl.RoomObject;
-import de.cg.rb.ctrl.RoomSettings;
+import de.cg.rb.ctrl.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +18,8 @@ public class RoomPanel extends JPanel {
 
     public RoomPanel() {
         super();
+
+        requestFocus();
 
         addMouseListener(new MouseListener() {
             @Override
@@ -40,7 +39,7 @@ public class RoomPanel extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                requestFocus();
             }
 
             @Override
@@ -48,6 +47,10 @@ public class RoomPanel extends JPanel {
 
             }
         });
+
+        setFocusable(true);
+
+        addKeyListener(new KeyManager());
     }
 
     @Override
@@ -76,8 +79,8 @@ public class RoomPanel extends JPanel {
         g.setColor(Color.GRAY);
         int grid = GlobalSettings.gridSize;
         if (grid > 2) {
-            for (int y = 0; y<(getHeight()+offsetY)/grid; y++) {
-                for (int x = 0; x<(getWidth()+offsetX)/grid; x++) {
+            for (int y = 0; y<(getHeight()+offsetY)/grid+1; y++) {
+                for (int x = 0; x<(getWidth()+offsetX)/grid+1; x++) {
                     g.drawRect(x * (grid) - offsetX, y * grid - offsetY, grid, grid);
                 }
             }
@@ -89,23 +92,38 @@ public class RoomPanel extends JPanel {
 
         if (e.getButton() == MouseEvent.BUTTON1) {
 
-            if (RoomSettings.isInit) {
-                var selected = GlobalSettings.selected;
-                if (selected >= 0) {
-                    var obj = GlobalSettings.initializedObjects.get(selected);
-                    RoomObject ro;
+            /*  Object settings menu   */
+            if (KeyManager.CTRL_PRESSED) {
+                int mx = e.getX() + offsetX;
+                int my = e.getY() + offsetY;
+                RoomObject ro = getObject(mx, my);
 
-                    int grid = GlobalSettings.gridSize;
+                if (ro != null) new ObjectSettingsWindow(ro);
 
-                    int x = (e.getX()+offsetX)/grid*grid;
-                    int y = (e.getY()+offsetY)/grid*grid;
-                    int w = obj.width;
-                    int h = obj.height;
+                KeyManager.CTRL_PRESSED = false;
 
-                    ro = new RoomObject(x, y, w, h, obj);
-                    RoomSettings.roomObjects.add(ro);
+            }
 
-                    System.out.println("Object placed at " + x + " / " + y);
+            /*  Placing Objects   */
+            else {
+                if (RoomSettings.isInit) {
+                    var selected = GlobalSettings.selected;
+                    if (selected >= 0) {
+                        var obj = GlobalSettings.initializedObjects.get(selected);
+                        RoomObject ro;
+
+                        int grid = GlobalSettings.gridSize;
+
+                        int x = (e.getX() + offsetX) / grid * grid;
+                        int y = (e.getY() + offsetY) / grid * grid;
+                        int w = obj.width;
+                        int h = obj.height;
+
+                        ro = new RoomObject(x, y, w, h, obj);
+                        RoomSettings.roomObjects.add(ro);
+
+                        System.out.println("Object placed at " + x + " / " + y);
+                    }
                 }
             }
 
@@ -128,5 +146,14 @@ public class RoomPanel extends JPanel {
             offsetX += dx;
             offsetY += dy;
         }
+    }
+
+    public static RoomObject getObject(int mx, int my) {
+        for (RoomObject ro : RoomSettings.roomObjects) {
+            if (mx > ro.x && mx < ro.x+ro.w && my > ro.y && my < ro.y + ro.h)
+                return ro;
+        }
+
+        return null;
     }
 }

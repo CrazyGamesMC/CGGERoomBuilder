@@ -2,6 +2,7 @@ package de.cg.rb.windows;
 
 import de.cg.rb.ctrl.FileManager;
 import de.cg.rb.ctrl.GlobalSettings;
+import de.cg.rb.ctrl.KeyManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,8 @@ public class MainWindow extends JFrame {
         setSize(1280, 720);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
+
+
     }
 
     void initMenuBar() {
