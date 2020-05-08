@@ -3,6 +3,7 @@ package de.cg.rb.windows;
 import de.cg.rb.ctrl.FileManager;
 import de.cg.rb.ctrl.GlobalSettings;
 import de.cg.rb.ctrl.KeyManager;
+import de.cg.rb.ctrl.ResizeManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +50,7 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
 
+        addComponentListener(new ResizeManager(this));
 
     }
 
