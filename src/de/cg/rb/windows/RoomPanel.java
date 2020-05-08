@@ -104,6 +104,16 @@ public class RoomPanel extends JPanel {
 
             }
 
+            else if (KeyManager.SHIFT_PRESSED) {
+                int mx = e.getX() + offsetX;
+                int my = e.getY() + offsetY;
+                RoomObject ro = getObject(mx, my);
+
+                if (ro != null) {
+                    RoomSettings.roomObjects.remove(ro);
+                }
+            }
+
             /*  Placing Objects   */
             else {
                 if (RoomSettings.isInit) {
