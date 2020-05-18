@@ -39,7 +39,7 @@ public class SettingsQuestion {
     }
 
     public enum Type {
-        STRING, OPTIONAL_STRING, CHECKBOX;
+        STRING, PATH, CHECKBOX;
     }
 
 

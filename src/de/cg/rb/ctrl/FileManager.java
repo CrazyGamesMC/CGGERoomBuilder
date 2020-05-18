@@ -76,7 +76,7 @@ public class FileManager {
 
     public static void loadRoom(String path) {
 
-        RoomSettings.name = path;
+        RoomSettings.name = path.replace(GlobalSettings.fileExtensionRoom, "");
         RoomSettings.isInit = true;
         RoomSettings.roomObjects.clear();
 

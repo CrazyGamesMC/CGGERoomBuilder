@@ -16,7 +16,7 @@ public class AddObjectsWindow extends SettingsWindow {
                 new SettingsQuestion("Package"),
                 new SettingsQuestion("Name"),
                 new SettingsQuestion("Display as rectangle", SettingsQuestion.Type.CHECKBOX),
-                new SettingsQuestion("Or as Sprite"),
+                new SettingsQuestion("Or as Sprite", SettingsQuestion.Type.PATH),
                 new SettingsQuestion("Width"),
                 new SettingsQuestion("Height"),
                 new SettingsQuestion("Include Width and Height in constructor?", SettingsQuestion.Type.CHECKBOX, true)

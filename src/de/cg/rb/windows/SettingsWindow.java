@@ -4,6 +4,7 @@ import de.cg.rb.ctrl.SettingsQuestion;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class SettingsWindow extends JFrame {
 
@@ -54,6 +55,28 @@ public class SettingsWindow extends JFrame {
 
                 q.checkBox = checkBox;
             }
+
+            else if (q.type == SettingsQuestion.Type.PATH) {
+                var textField = new JTextField();
+                textField.setText(q.defaultString);
+                textField.setBounds(220, 70 + i * (40), 150, 30);
+                add(textField);
+
+                var btnBrowse = new JButton("Browse");
+                btnBrowse.setBounds(220+150+10, 70 + i * (40), 40, 30);
+                btnBrowse.addActionListener((e) -> {
+                    var fc = new JFileChooser();
+                    fc.setCurrentDirectory(new File("").getAbsoluteFile());
+                    int result = fc.showOpenDialog(getParent());
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        textField.setText(fc.getSelectedFile().getAbsolutePath());
+                    }
+                });
+                add(btnBrowse);
+
+                q.textField = textField;
+            }
+
             questions[i] = q;
         }
 

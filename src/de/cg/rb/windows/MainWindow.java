@@ -1,12 +1,9 @@
 package de.cg.rb.windows;
 
 import de.cg.rb.ctrl.FileManager;
-import de.cg.rb.ctrl.GlobalSettings;
-import de.cg.rb.ctrl.KeyManager;
 import de.cg.rb.ctrl.ResizeManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
